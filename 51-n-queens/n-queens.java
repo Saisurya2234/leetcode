@@ -1,77 +1,79 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 class Solution {
-    public List<List<String>> solveNQueens(int n) {
-        char[][] board = new char[n][n];
-        List<List<String>> result = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                board[i][j] = '.';
-            }
-        }
-        solve(n, 0, board, result);
-        return result;
+    public List<List<String>> solveNQueens(int n) 
+    {
+        boolean[][] board=new boolean[n][n];
+        List<String>ll=new ArrayList<>();
+        List<List<String>> ans=new ArrayList<>();
+
+        queens(board,n,0,ll,ans);
+        return ans;
+        
     }
 
-    private boolean diup(char[][] arr, int row, int col) {
-        int i = row;
-        int j = col;
-        while (i >= 0 && j >= 0) {
-            if (arr[i][j] == 'Q') {
-                return false;
+    public static void queens(boolean[][]board,int Q,int row,List<String>ll,List<List<String>>ans)
+    {
+        if(Q==0)
+        {
+            for(int i=0;i<board.length;i++)
+            {
+                String s="";
+                for(int j=0;j<board.length;j++)
+                {
+                    if(board[i][j])
+                        s=s+'Q';
+                    else
+                        s+='.';
+                }
+                ll.add(s);
             }
-            i--;
-            j--;
-        }
-        return true;
-    }
-
-    private boolean dilinear(char[][] arr, int row, int col) {
-        int i = row;
-        int j = col;
-        while (j >= 0) {
-            if (arr[i][j] == 'Q') {
-                return false;
-            }
-            j--;
-        }
-        return true;
-    }
-
-    private boolean didown(char[][] arr, int row, int col, int n) {
-        int i = row;
-        int j = col;
-        while (i < n && j >= 0) {
-            if (arr[i][j] == 'Q') {
-                return false;
-            }
-            j--;
-            i++;
-        }
-        return true;
-    }
-
-    private void solve(int n, int col, char[][] arr, List<List<String>> result) {
-        if (col == n) {
-            result.add(construct(arr));
+            ans.add(new ArrayList<>(ll));
+            ll.clear();
             return;
+
         }
-        for (int row = 0; row < n; row++) {
-            if (didown(arr, row, col, n) && dilinear(arr, row, col) && diup(arr, row, col)) {
-                arr[row][col] = 'Q';
-                solve(n, col + 1, arr, result);
-                arr[row][col] = '.';
+
+        for(int col=0;col<board.length;col++)
+        {
+            if(possible(board,row,col))
+            {
+                board[row][col]=true;
+                queens(board, Q-1, row+1,ll,ans);
+                board[row][col]=false;
             }
         }
     }
-
-    private List<String> construct(char[][] arr) {
-        List<String> res = new LinkedList<>();
-        for (int i = 0; i < arr.length; i++) {
-            res.add(new String(arr[i]));
+    public static boolean possible(boolean[][]board,int row,int col)
+    {
+        int r=row;
+        while(r>=0)
+        {
+            if(board[r][col])
+                return false;
+            r--;
         }
-        return res;
+        r=row;
+        int c=col;
+
+        while(r>=0 && c>=0)
+        {
+            if(board[r][c])
+                return false;
+            r--;
+            c--;
+        }
+
+        r=row;
+        c=col;
+
+        while(r>=0 && c<board.length)
+        {
+            if(board[r][c])
+                return false;
+            r--;
+            c++;
+
+        }
+        return true;
     }
+
 }
