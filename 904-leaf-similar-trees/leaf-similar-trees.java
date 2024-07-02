@@ -14,7 +14,8 @@
  * }
  */
 
-class Solution {
+class Solution {// take ewo list && take the tress nd check until the condn left& rigth ==0;
+// if it is null ADD it list and compare the both list if it is same return true or return false:
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
         List<Integer> l1=new ArrayList<>();
         List<Integer>l2=new ArrayList<>();
