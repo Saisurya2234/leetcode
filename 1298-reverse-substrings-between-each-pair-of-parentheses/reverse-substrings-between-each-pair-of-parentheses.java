@@ -1,4 +1,10 @@
 // check the discussion .there have the explaination to understand the problem
+/**
+1) if the charecter is '(' push the empty string 
+2) else the character is ')'  adha pop() panitu reverse panitu adha append at peek;
+3) suppose string ah iruntha direct ah peek la add pananum.
+
+ */
 
 class Solution {
     public String reverseParentheses(String s) {
