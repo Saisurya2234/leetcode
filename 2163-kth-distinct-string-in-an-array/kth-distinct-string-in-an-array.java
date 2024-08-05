@@ -1,18 +1,25 @@
 class Solution {
     public String kthDistinct(String[] arr, int k) {
-        Map<String, Integer> map=new HashMap<>();
-        for(String i: arr){
-            map.put(i, map.getOrDefault(i,0)+1);
-        }
-        for(String i:arr)
-        {
-            if(map.get(i)==1)
-            k--;
-            if(k==0)
-            {
-                return i;
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        int count=1;
+        for(String s : arr){
+            if(hashMap.containsKey(s)){
+                hashMap.put(s,hashMap.get(s)+1);
+            }else{
+                hashMap.put(s,1);
             }
         }
+        for(int i=0;i<arr.length;i++){
+            if(hashMap.get(arr[i]) == 1) {
+                if(count == k) {
+                    return arr[i];
+                }else{
+                    count++;
+                }
+            }
+             
+        }
         return "";
+
     }
 }
