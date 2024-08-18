@@ -12,8 +12,6 @@ class Solution {
         if(dp[n]!=-1){
             return dp[n];
         }
-
-
         dp[n]=steps(dp,n-1)+steps(dp,n-2);
         return dp[n];
     }
