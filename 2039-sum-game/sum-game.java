@@ -8,7 +8,9 @@ class Solution {
             else d-=c[i]-'0';
         }
         for(int i=c.length/2; i<c.length; i++){
-            if(c[i]=='?'){d+=9; q++;}
+            if(c[i]=='?')
+            {d+=9; q++;
+            }
             else d+=c[i]-'0';
         }
         if(q%2==1)return true;
