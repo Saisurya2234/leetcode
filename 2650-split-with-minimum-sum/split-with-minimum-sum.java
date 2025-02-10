@@ -17,9 +17,9 @@ class Solution {
                 s2+=arr[i]+"";
             }
         }
-        int res=Integer.parseInt(s1);
-        int res2=Integer.parseInt(s2);
-        return res+res2;
+         return Integer.parseInt(s1)+Integer.parseInt(s2);
+        
+       
         
         
         
